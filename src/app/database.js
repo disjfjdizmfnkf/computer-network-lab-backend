@@ -1,4 +1,6 @@
 const mysql2 = require('mysql2')
+const PASSWORD = '284622'
+
 
 // 1.创建连接池
 const connectionPool = mysql2.createPool({
@@ -6,7 +8,7 @@ const connectionPool = mysql2.createPool({
     port: 3306,
     database: 'cdpc',
     user: 'root',
-    password: '284622',
+    password: PASSWORD,
     connectionLimit: 5
 })
 

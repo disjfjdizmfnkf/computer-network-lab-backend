@@ -52,6 +52,26 @@ class UserController {
             data: result
         }
     }
+
+    async getFriends(ctx, next) {
+        const { userId } = ctx.params;
+        const result = await UserService.getFriends(userId);
+        ctx.body = {
+            code: 0,
+            data: result
+        }
+    }
+
+    async addFriend(ctx, next) {
+        const { userId } = ctx.params;
+        const { friendName } = ctx.request.body;
+        const result = await UserService.addFriend(userId, friendName);
+        ctx.body = {
+            code: 0,
+            message: '添加好友成功',
+            data: result
+        }
+    }
 }
 
 module.exports = new UserController()

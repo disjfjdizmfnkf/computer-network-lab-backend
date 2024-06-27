@@ -30,6 +30,34 @@ class UserService {
         const [result] = await connection.execute(statement, [name, sign, id]);
         return result;
     }
+
+    async getFriends(userId) {
+        const statement = `
+        SELECT u.id, u.name, u.avatar_url, u.sign
+        FROM user u
+        JOIN friends f ON u.id = f.friend_id
+        WHERE f.user_id = ?;
+    `;
+        const [values] = await connection.execute(statement, [userId]);
+        return values;
+    }
+
+    async addFriend(userId, friendName) {
+        // 通过名字查找好友的ID
+        const [friend] = await this.findUser(friendName);
+        if (!friend) {
+            throw new Error(`用户: ${friendName} 不存在!`);
+        }
+        const friendId = friend.id;
+
+        // 在friends表中插入两行新的记录，实现双向好友
+        const statement = `
+        INSERT INTO friends (user_id, friend_id)
+        VALUES (?, ?), (?, ?);
+    `;
+        const [result] = await connection.execute(statement, [userId, friendId, friendId, userId]);
+        return result;
+    }
 }
 
 module.exports = new UserService()

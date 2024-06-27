@@ -1,7 +1,7 @@
 const KoaRouter = require('@koa/router');
 const {creat, updateUser} = require("../controller/user.controller")
 const {verifyUser, handlePassword} = require("../middleware/user.middleware");
-const {showAvatarImage, queryUserByName} = require('../controller/user.controller')
+const {showAvatarImage, queryUserByName, getFriends, addFriend} = require('../controller/user.controller')
 const {verifyAuth} = require("../middleware/login.middleware");
 const {verifyPermission} = require("../middleware/permission.middleware");
 
@@ -19,6 +19,14 @@ userRouter.get('/:userName', queryUserByName)
 
 // 修改信息
 userRouter.patch('/:id', verifyAuth, updateUser);
+
+
+// 好友系统
+// 获取好友列表
+userRouter.get('/:userId/friends', getFriends);
+// 添加好友
+userRouter.post('/:userId/friends', addFriend);
+
 
 
 // 3.导出路由
