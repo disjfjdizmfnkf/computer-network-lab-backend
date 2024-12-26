@@ -9,7 +9,7 @@ class MomentService {
     }
 
     // 查询动态返回动态信息，评论信息，评论用户信息
-    async queryList(offset = 0, size = 3) {
+    async queryList(offset = 0, size = 5) {
         const statement =
             `
                 SELECT m.id                                                             id,

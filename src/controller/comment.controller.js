@@ -21,7 +21,7 @@ class CommentController {
         const {content, commentId, momentId} = ctx.request.body
         const {id} = ctx.user
 
-        const result = await CommentService.replay(content, commentId, momentId, id)
+        const result = await CommentService.queryCommentByID(content, commentId, momentId, id)
 
         ctx.body = {
             code: 0,

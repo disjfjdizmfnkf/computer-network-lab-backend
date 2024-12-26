@@ -26,7 +26,6 @@ connectionPool.getConnection((err, connection) => {
             console.log('数据库连接成功')
         }
     })
-
 })
 
 // 调用连接池的promise方法，之后调用连接池方法时都返回promise

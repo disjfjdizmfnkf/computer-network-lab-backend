@@ -23,7 +23,8 @@ class CommentService
         return selectResult[0];
     }
 
-    async replay(content, commentId, momentId, userId) {
+
+    async queryCommentByID(content, commentId, momentId, userId) {
         const insertStatement = 'INSERT INTO comment (content, moment_id, comment_id, user_id) VALUES (?, ?, ?, ?);';
         const [insertResult] = await connection.execute(insertStatement, [content,  momentId, commentId, userId]);
 
